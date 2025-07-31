@@ -15,6 +15,9 @@ class WeatherService {
           lon: lon,
           appid: this.apiKey,
           units: 'metric'
+        },
+        headers: {
+          'Content-Type': 'application/json'
         }
       });
 
@@ -33,6 +36,9 @@ class WeatherService {
           lon: lon,
           appid: this.apiKey,
           units: 'metric'
+        },
+        headers: {
+          'Content-Type': 'application/json'
         }
       });
 
@@ -50,6 +56,9 @@ class WeatherService {
           q: cityName,
           limit: 5,
           appid: this.apiKey
+        },
+        headers: {
+          'Content-Type': 'application/json'
         }
       });
 
@@ -80,6 +89,9 @@ class WeatherService {
           lon: lon,
           limit: 1,
           appid: this.apiKey
+        },
+        headers: {
+          'Content-Type': 'application/json'
         }
       });
 
@@ -125,23 +137,34 @@ class WeatherService {
       precipitation: item.pop * 100 // Probability of precipitation as percentage
     }));
 
-    // Group by day for daily forecast
-    const daily = [];
-    const processedDays = new Set();
+    // Group by day for daily forecast - properly calculate daily highs/lows
+    const dailyData = {};
     
     data.list.forEach(item => {
       const date = new Date(item.dt * 1000).toISOString().split('T')[0];
-      if (!processedDays.has(date) && daily.length < 5) {
-        daily.push({
+      
+      if (!dailyData[date]) {
+        dailyData[date] = {
           date: date,
-          high: Math.round(item.main.temp_max),
-          low: Math.round(item.main.temp_min),
-          condition: this.capitalizeWords(item.weather[0].description),
-          precipitation: Math.round(item.pop * 100)
-        });
-        processedDays.add(date);
+          temps: [],
+          conditions: [],
+          precipitations: []
+        };
       }
+      
+      dailyData[date].temps.push(item.main.temp);
+      dailyData[date].conditions.push(item.weather[0].description);
+      dailyData[date].precipitations.push(item.pop * 100);
     });
+
+    // Convert to final daily format
+    const daily = Object.values(dailyData).slice(0, 5).map(day => ({
+      date: day.date,
+      high: Math.round(Math.max(...day.temps)),
+      low: Math.round(Math.min(...day.temps)),
+      condition: this.capitalizeWords(day.conditions[Math.floor(day.conditions.length / 2)]), // Use middle condition
+      precipitation: Math.round(Math.max(...day.precipitations)) // Use highest precipitation chance
+    }));
 
     return { hourly, daily };
   }
@@ -183,12 +206,65 @@ class WeatherService {
   }
 
   // Mock method for development when API key is not available
-  getMockWeatherData(lat = 37.7749, lon = -122.4194) {
+  getMockWeatherData(lat = 42.34, lon = 27.19) {
+    // Ensure coordinates are numbers
+    const latitude = parseFloat(lat);
+    const longitude = parseFloat(lon);
+    
+    console.log(`🎯 Detecting location for coordinates: ${latitude}, ${longitude}`);
+    
+    // Detect location based on coordinates
+    let city = 'Unknown Location';
+    let country = 'Unknown';
+    
+    // Enhanced coordinate detection for Bulgaria and other locations
+    if (latitude >= 41.2 && latitude <= 44.2 && longitude >= 22.4 && longitude <= 28.6) {
+      console.log('✅ Coordinates are within Bulgaria bounds');
+      // Bulgaria coordinates - more specific detection for Black Sea coast
+      if (latitude >= 42.3 && latitude <= 42.4 && longitude >= 27.1 && longitude <= 27.3) {
+        city = 'Burgas Region';
+        country = 'BG';  
+        console.log('🏖️ Detected: Burgas Region (Black Sea Coast)');
+      } else if (latitude >= 42.6 && latitude <= 42.8 && longitude >= 23.2 && longitude <= 23.4) {
+        city = 'Sofia';
+        country = 'BG';
+        console.log('🏛️ Detected: Sofia');
+      } else if (latitude >= 42.6 && latitude <= 42.7 && longitude >= 25.2 && longitude <= 25.4) {
+        city = 'Sredets';
+        country = 'BG';
+        console.log('🏘️ Detected: Sredets');
+      } else if (latitude >= 42.1 && latitude <= 42.2 && longitude >= 24.8 && longitude <= 25.0) {
+        city = 'Plovdiv';
+        country = 'BG';
+        console.log('🏭 Detected: Plovdiv');
+      } else {
+        city = 'Bulgaria';
+        country = 'BG';
+        console.log('🇧🇬 Detected: General Bulgaria location');
+      }
+    } else if (latitude >= 37.7 && latitude <= 37.8 && longitude >= -122.5 && longitude <= -122.4) {
+      city = 'San Francisco';
+      country = 'US';
+    } else if (latitude >= 40.7 && latitude <= 40.8 && longitude >= -74.1 && longitude <= -74.0) {
+      city = 'New York';
+      country = 'US';
+    } else if (latitude >= 51.5 && latitude <= 51.6 && longitude >= -0.2 && longitude <= -0.1) {
+      city = 'London';
+      country = 'GB';
+    } else {
+      // Generic location based on coordinates
+      console.log('❓ Using generic coordinates fallback');
+      city = `Location ${latitude.toFixed(2)}°N`;
+      country = `${longitude.toFixed(2)}°E`;
+    }
+
+    console.log(`📍 Final location result: ${city}, ${country}`);
+    
     return {
       location: {
-        city: 'San Francisco',
-        country: 'US',
-        coordinates: { lat, lon }
+        city,
+        country,
+        coordinates: { lat: latitude, lon: longitude }
       },
       current: {
         temperature: Math.round(18 + Math.random() * 10),

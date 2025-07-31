@@ -8,18 +8,24 @@ export const useWeatherData = (refreshInterval: number = 300000) => { // 5 minut
     error: undefined,
     loading: true
   });
+  const [currentLocation, setCurrentLocation] = useState<{ lat: number; lon: number } | null>(null);
 
-  const fetchWeatherData = useCallback(async () => {
+  const fetchWeatherData = useCallback(async (lat?: number, lon?: number) => {
     setState(prev => ({ ...prev, loading: true, error: undefined }));
     
     try {
-      const data = await weatherApi.fetchWeatherData();
+      console.log('🌤️ Fetching weather data:', { lat, lon });
+      const data = lat && lon 
+        ? await weatherApi.fetchWeatherByLocation(lat, lon)
+        : await weatherApi.fetchWeatherData();
+      console.log('📊 Weather data received:', data.location);
       setState({
         data,
         error: undefined,
         loading: false
       });
     } catch (error) {
+      console.error('❌ Weather fetch failed:', error);
       setState({
         data: undefined,
         error: error instanceof Error ? error.message : 'An unknown error occurred',
@@ -29,42 +35,41 @@ export const useWeatherData = (refreshInterval: number = 300000) => { // 5 minut
   }, []);
 
   const fetchWeatherByLocation = useCallback(async (lat: number, lon: number) => {
-    setState(prev => ({ ...prev, loading: true, error: undefined }));
-    
-    try {
-      const data = await weatherApi.fetchWeatherByLocation(lat, lon);
-      setState({
-        data,
-        error: undefined,
-        loading: false
-      });
-    } catch (error) {
-      setState({
-        data: undefined,
-        error: error instanceof Error ? error.message : 'An unknown error occurred',
-        loading: false
-      });
-    }
-  }, []);
-
-  const refetch = useCallback(() => {
-    fetchWeatherData();
+    setCurrentLocation({ lat, lon });
+    await fetchWeatherData(lat, lon);
   }, [fetchWeatherData]);
 
+  const refetch = useCallback(() => {
+    if (currentLocation) {
+      fetchWeatherData(currentLocation.lat, currentLocation.lon);
+    } else {
+      fetchWeatherData();
+    }
+  }, [fetchWeatherData, currentLocation]);
+
   useEffect(() => {
+    // Force initial fetch on component mount
+    console.log('🚀 Initial weather data fetch on mount');
     fetchWeatherData();
   }, [fetchWeatherData]);
 
   useEffect(() => {
     if (refreshInterval > 0) {
-      const interval = setInterval(fetchWeatherData, refreshInterval);
+      const interval = setInterval(() => {
+        if (currentLocation) {
+          fetchWeatherData(currentLocation.lat, currentLocation.lon);
+        } else {
+          fetchWeatherData();
+        }
+      }, refreshInterval);
       return () => clearInterval(interval);
     }
-  }, [fetchWeatherData, refreshInterval]);
+  }, [fetchWeatherData, refreshInterval, currentLocation]);
 
   return {
     ...state,
     refetch,
-    fetchWeatherByLocation
+    fetchWeatherByLocation,
+    currentLocation
   };
 };

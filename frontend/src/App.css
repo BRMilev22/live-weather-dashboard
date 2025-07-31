@@ -1,269 +1,369 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-  --secondary-gradient: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
-  --accent-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-  --glass-bg: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.8);
-  --text-muted: rgba(255, 255, 255, 0.6);
+  /* Apple Weather Realistic Sky System */
+  --sky-clear-day: 
+    radial-gradient(ellipse at top, #4A90E2 0%, #7BB3F2 15%, #87CEEB 35%, #B8E0F5 65%, #E0F4FF 85%, #F8FCFF 100%),
+    linear-gradient(180deg, #5AA3F0 0%, #87CEEB 20%, #B0D8F0 40%, #D4EBFA 70%, #F0F8FF 90%, #FFFFFF 100%);
+  --sky-partly-cloudy: 
+    radial-gradient(ellipse at top, #6B9BD2 0%, #8BB5E8 25%, #A8D0F0 50%, #C5E5F8 75%, #E8F4FF 100%),
+    linear-gradient(180deg, #789AC7 0%, #9BB8D9 30%, #BDD6EB 60%, #DDEAFC 80%, #F5FAFF 100%);
+  --sky-cloudy: 
+    radial-gradient(ellipse at top, #8A9BA8 0%, #A8B8C8 25%, #C0D0E0 50%, #D8E5F0 75%, #F0F5FA 100%),
+    linear-gradient(180deg, #9EADB8 0%, #B8C7D2 30%, #D2DCE6 60%, #E6EDF4 80%, #F8FAFC 100%);
+  --sky-rainy: 
+    radial-gradient(ellipse at top, #6B7B8C 0%, #8A99AA 25%, #A8B7C8 50%, #C6D5E6 75%, #E4F0F8 100%),
+    linear-gradient(180deg, #748592 0%, #8E9DAA 30%, #A8B7C2 60%, #C2D1DA 80%, #DCE8F0 100%);
+  --sky-sunset: 
+    radial-gradient(ellipse at top, #FF6B6B 0%, #FF8E7F 15%, #FFB199 35%, #FFD4B3 65%, #FFF2E6 85%, #FFFFFF 100%),
+    linear-gradient(180deg, #FF7A7A 0%, #FF9F88 20%, #FFC4A6 40%, #FFE9C4 70%, #FFF6E6 90%, #FFFFFF 100%);
+  --sky-night: 
+    radial-gradient(ellipse at top, #1A1A2E 0%, #2D2D54 25%, #404070 50%, #5A5A8C 75%, #7070A8 100%),
+    linear-gradient(180deg, #0F0F23 0%, #1E1E41 30%, #2D2D5F 60%, #3C3C7D 80%, #4B4B9B 100%);
+  
+  /* Apple's True Glassmorphism - Transparent */
+  --glass-ultra-light: rgba(255, 255, 255, 0.1);
+  --glass-light: rgba(255, 255, 255, 0.15);
+  --glass-medium: rgba(255, 255, 255, 0.2);
+  --glass-heavy: rgba(255, 255, 255, 0.25);
+  --glass-tinted: rgba(255, 255, 255, 0.3);
+  
+  /* Apple Weather Text Colors */
+  --text-primary: #1D1D1F;
+  --text-secondary: #48484A;
+  --text-tertiary: #8E8E93;
+  --text-quaternary: #C7C7CC;
+  --text-white: #FFFFFF;
+  --text-blue: #007AFF;
+  
+  /* Apple Weather Specific Colors */
+  --temp-extreme-cold: #0066CC;
+  --temp-cold: #0099FF;
+  --temp-cool: #00CCFF;
+  --temp-mild: #66FF66;
+  --temp-warm: #FFCC00;
+  --temp-hot: #FF9900;
+  --temp-extreme-hot: #FF6600;
+  
+  /* Apple System Colors - Exact */
+  --blue: #007AFF;
+  --green: #34C759;
+  --orange: #FF9500;
+  --red: #FF3B30;
+  --yellow: #FFCC00;
+  --purple: #AF52DE;
+  --pink: #FF2D92;
+  --teal: #5AC8FA;
+  --indigo: #5856D6;
+  
+  /* Apple Shadows - Realistic */
+  --shadow-ultra-soft: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.16), 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.06);
+  
+  /* Apple Border Radius */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+  --radius-2xl: 28px;
+  --radius-full: 9999px;
+  
+  /* Apple Spacing System */
+  --space-xs: 6px;
+  --space-sm: 10px;
+  --space-md: 14px;
+  --space-lg: 18px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+  
+  /* Apple Typography Scale */
+  --font-xs: 11px;
+  --font-sm: 13px;
+  --font-md: 15px;
+  --font-lg: 17px;
+  --font-xl: 22px;
+  --font-2xl: 28px;
+  --font-3xl: 34px;
+  --font-4xl: 48px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .App {
   min-height: 100vh;
-  background: var(--primary-gradient);
+  background: linear-gradient(180deg, #87CEEB 0%, #E6F3FF 50%, #F8FCFF 100%);
   color: var(--text-primary);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
   position: relative;
   overflow-x: hidden;
+  line-height: 1.47;
 }
 
+/* Simple cloud overlay - no animation */
 .App::before {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
   background: 
-    radial-gradient(circle at 25% 25%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.2) 0%, transparent 50%);
+    radial-gradient(ellipse 800px 200px at 20% 10%, rgba(255, 255, 255, 0.3) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 150px at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 100px at 50% 60%, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
+  opacity: 0.8;
 }
 
+/* Remove heavy solar animation - keep it simple */
+
+/* Apple Weather True Glassmorphic Header */
 .header {
   text-align: center;
-  padding: 3rem 2rem;
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--glass-border);
+  padding: var(--space-3xl) var(--space-xl) var(--space-2xl);
+  background: var(--glass-medium);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
-  z-index: 1;
-  animation: slideDown 1s ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  z-index: 100;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+  margin: 0 var(--space-md) var(--space-xl) var(--space-md);
 }
 
 .header h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
-  margin: 0;
-  background: linear-gradient(135deg, #ffffff 0%, #f093fb 50%, #4facfe 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: none;
-  letter-spacing: -0.02em;
-  animation: glow 3s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-  from {
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
-  }
-  to {
-    filter: drop-shadow(0 0 30px rgba(240, 147, 251, 0.5));
-  }
+  font-size: clamp(var(--font-2xl), 4vw, var(--font-4xl));
+  font-weight: 700;
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  -webkit-font-smoothing: antialiased;
 }
 
 .header p {
-  font-size: 1.25rem;
+  font-size: var(--font-lg);
   font-weight: 400;
-  margin: 1rem 0 0 0;
   color: var(--text-secondary);
-  letter-spacing: 0.01em;
-  animation: fadeInUp 1s ease-out 0.3s both;
+  margin: 0;
+  max-width: 600px;
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
 }
 
-.error-banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  padding: 1rem 1.5rem;
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: 1rem;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.95rem;
-  font-weight: 500;
-  backdrop-filter: blur(10px);
-  animation: slideInDown 0.5s ease-out;
-}
-
-.retry-button {
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.5rem;
-  color: white;
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-}
-
-.retry-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
-}
-
-@keyframes slideInDown {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
+/* Layout */
 .main-content {
-  padding: 3rem 2rem;
+  padding: var(--space-lg);
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .current-weather-section {
-  max-width: 1400px;
-  margin: 0 auto 3rem auto;
-  animation: fadeInUp 1s ease-out 0.9s both;
+  margin: 0 0 var(--space-lg) 0;
 }
 
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  animation: fadeInUp 1s ease-out 0.6s both;
+  gap: var(--space-lg);
+  margin: 0 0 var(--space-lg) 0;
 }
 
-.weather-section,
-.map-section {
-  background: var(--glass-bg);
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  min-height: 0;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  min-height: 0;
+}
+
+/* Error Banner */
+.error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--glass-tinted);
   backdrop-filter: blur(20px);
-  border-radius: 2rem;
-  padding: 2.5rem;
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateY(0);
+  border: 1px solid rgba(255, 59, 48, 0.3);
+  border-radius: var(--radius-md);
+  color: var(--red);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  box-shadow: var(--shadow-card);
 }
 
-.weather-section::before,
-.map-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  opacity: 0;
-  transition: opacity 0.4s ease;
+.retry-button {
+  padding: var(--space-xs) var(--space-md);
+  background: var(--glass-medium);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-xs);
+  color: var(--text-primary);
+  font-size: var(--font-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.retry-button:hover {
+  background: var(--glass-heavy);
+  transform: translateY(-1px);
+}
+
+/* Apple Weather True Glassmorphic Cards */
+.weather-section,
+.insights-section {
+  background: var(--glass-medium);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  transition: transform 0.2s ease;
 }
 
 .weather-section:hover,
-.map-section:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px 0 rgba(31, 38, 135, 0.5);
-  border-color: rgba(255, 255, 255, 0.3);
+.insights-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
-.weather-section:hover::before,
-.map-section:hover::before {
-  opacity: 1;
-}
-
-.weather-section::after,
-.map-section::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.weather-section:hover::after,
-.map-section:hover::after {
-  opacity: 1;
-}
-
+/* Responsive Design */
 @media (max-width: 1024px) {
   .dashboard-grid {
-    gap: 2rem;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
     max-width: 800px;
   }
   
   .weather-section,
-  .map-section {
-    padding: 2rem;
+  .insights-section {
+    padding: var(--space-lg);
   }
 }
 
 @media (max-width: 768px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 0 1rem;
+    gap: var(--space-md);
   }
   
   .header {
-    padding: 2rem 1rem;
+    padding: var(--space-xl) var(--space-md);
   }
   
   .main-content {
-    padding: 2rem 1rem;
+    padding: var(--space-md);
   }
   
   .weather-section,
-  .map-section {
-    padding: 1.5rem;
-    border-radius: 1.5rem;
+  .insights-section {
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
   }
 }
 
 @media (max-width: 480px) {
   .weather-section,
-  .map-section {
-    padding: 1.25rem;
-    border-radius: 1.25rem;
+  .insights-section {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
   }
+  
+  .header h1 {
+    font-size: var(--font-xl);
+  }
+  
+  .header p {
+    font-size: var(--font-md);
+  }
+}
+
+/* Enhanced Apple-style Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--glass-tinted);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--blue) 0%, var(--teal) 100%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--purple) 0%, var(--pink) 100%);
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  position: relative;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid var(--glass-tinted);
+  border-top: 2px solid var(--blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Focus states for accessibility */
+button:focus,
+input:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
 }
