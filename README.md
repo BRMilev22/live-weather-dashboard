@@ -2,6 +2,24 @@
 
 A modern, real-time weather dashboard featuring interactive data visualizations and intelligent weather insights. Built to showcase full-stack development skills with modern web technologies and creative UI design.
 
+## 📸 Live Demo
+
+<div align="center">
+  
+### 🌤️ Main Dashboard
+<img src="images/demo-image.png" alt="Live Weather Dashboard - Main Interface" width="800px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);" />
+
+*Real-time weather data with stunning glassmorphism design, animated charts, and intelligent weather insights*
+
+### 📍 Location Search
+<img src="images/add-location.png" alt="Add Location Modal - Search Interface" width="600px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);" />
+
+*Intuitive location search with popular cities and real-time suggestions*
+
+</div>
+
+---
+
 ## 🌟 Features
 
 - **Real-time Weather Data**: Live weather information with automatic updates
@@ -15,6 +33,7 @@ A modern, real-time weather dashboard featuring interactive data visualizations 
 **Frontend:**
 - React 18 with TypeScript
 - Vite for fast development and building
+- Tailwind CSS for utility-first styling
 - Chart.js & React-Chart.js-2 for data visualization
 - Creative CSS with glassmorphism effects, animations, and modern gradients
 - Responsive design with floating animations and hover effects
@@ -132,24 +151,16 @@ live-weather-dashboard/
   - ✅ Implement responsive design with advanced CSS animations
   - ✅ Add creative scrollbar styling and background animations
 
-### Phase 4: Production Ready - 🚧 PLANNED
-- [ ] **Testing & Deployment**
-  - [ ] Add unit and integration tests
-  - [ ] Set up CI/CD pipeline
-  - [ ] Implement error monitoring and logging
-  - [ ] Deploy to production (Vercel/Netlify + Railway/Heroku)
-
 ## 🚀 Current Status
 ✅ Project scaffolding complete  
 ✅ Frontend and backend structure established  
 ✅ Phase 1: Core functionality with stunning UI complete  
 ✅ Phase 2: Enhanced features with real APIs complete  
+✅ Phase 3: Advanced UI/UX - Coming next  
 ✅ Real-time charts and live weather data with OpenWeatherMap API  
 ✅ Location search, geolocation, and weather forecasts  
 ✅ Advanced caching, rate limiting, and smart alerts  
 ✅ Creative weather insights with floating animations  
-🔄 Phase 3: Advanced UI/UX - Coming next  
-⏳ Phase 4: Testing & Production deployment - Future work
 
 ---
 
